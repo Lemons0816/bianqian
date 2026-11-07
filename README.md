@@ -74,27 +74,11 @@ v1.0.0 及更早的版本内部用的是 旧的 UPDATE_URL + latest.json 方案�
 结论：从 ≤1.0.0 升到具备 GitHub 更新能力的版本（如 1.1.0），这一次必须手动安装；从它之后起，往后就全自动了。
 手动升级（一次性，约 1 分钟）：
 1. 右键托盘图标 → 退出，确保旧便签已完全关闭（否则 exe 被占用无法覆盖安装）。
-2. 下载安装版：https://github.com/Lemons0816/bianqian/releases/download/v1.1.0/bianqian-1.1.0-setup.exe
+2. 下载安装版：https://github.com/Lemons0816/bianqian/releases/download
 3. 覆盖安装即可。便签数据不会丢失——内容和设置存在 %APPDATA%\便签\notes.json（在用户目录，不在安装目录），安装程序不会触碰它，开机自启、提醒频率等设置也会保留。
-4. 验证：托盘菜单底部应显示「便签 v1.1.0」；此时再点「检查更新…」会提示"已是最新版本"（因为已装 1.1.0 = GitHub 最新 1.1.0）。
+4. 验证：托盘菜单底部应显示「便签 v1.1.0」；此时再点「检查更新…」会提示"已是最新版本"（因为已装 1.1.0 = GitHub 最新 1.*。*）。
 顺带一提：GitHub Release 的资产上传建议用英文文件名（如 bianqian-1.1.0-setup.exe）。GitHub 的资产名编辑框对中文支持不佳，中文名资产常被塌缩成同名，导致发布时报 release assets name has already been taken。便签识别安装版的规则是"文件名含 setup/安装版 且不含 portable/便携版"，英文命名同样能被正确识别。
-国内从 GitHub Release 下载可能偏慢。如需加速，可在 main.js 的 checkForUpdates 里把下载直链（asset.browser_download_url）的 https://github.com 替换为镜像前缀（如 https://ghproxy.com/https://github.com）；或自行改用对象存储托管安装包。
 数据与设置
 - 所有便签内容保存在：%APPDATA%\便签\notes.json（右键菜单里可直接打开）
 - 托盘图标在屏幕右下角：左键点击 = 显示/收起，右键 = 菜单（自动隐藏 / 置顶 / 开机自启 / 退出）
 - 单实例运行：重复启动只会把已有便签唤出
-目录结构
-便签/
-├─ main.js          主进程：窗口、吸附、自动隐藏、托盘、持久化
-├─ preload.js       渲染进程安全桥接
-├─ index.html       便签界面
-├─ renderer.js      界面逻辑（清单渲染、勾选、行内编辑）
-├─ style.css        6 套主题配色 + 把手样式
-├─ tools/make-icon.js  生成应用/托盘图标（纯 Node 实现 PNG 编码）
-└─ 启动便签.vbs     双击启动（优先安装版，无黑窗），另有 启动便签.bat 同效
-打包（可选）
-npm run build
-一次生成两个版本到 dist/：
-- 便签便携版.exe —— 单文件免安装，可拷到任何 Windows 电脑直接运行
-- 便签安装版.exe —— NSIS 向导安装，可选安装目录，自动创建桌面/开始菜单快捷方式
-注意：每次改了版本号打包后，dist/ 里会同时存在新旧两个版本的 exe（旧的不会被自动删除）。分发或双击启动时务必认准当前版本号，误点旧 exe 会跑回老旧的更新逻辑（详见「更新系统」一节的说明）。建议打包后清理掉旧版本产物。
