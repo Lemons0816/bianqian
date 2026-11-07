@@ -74,7 +74,7 @@ v1.0.0 及更早的版本内部用的是 旧的 UPDATE_URL + latest.json 方案�
 结论：从 ≤1.0.0 升到具备 GitHub 更新能力的版本（如 1.1.0），这一次必须手动安装；从它之后起，往后就全自动了。
 手动升级（一次性，约 1 分钟）：
 1. 右键托盘图标 → 退出，确保旧便签已完全关闭（否则 exe 被占用无法覆盖安装）。
-2. 下载安装版：https://github.com/Lemons0816/bianqian/releases/download
+2. 下载安装版：https://github.com/Lemons0816/bianqian/releases
 3. 覆盖安装即可。便签数据不会丢失——内容和设置存在 %APPDATA%\便签\notes.json（在用户目录，不在安装目录），安装程序不会触碰它，开机自启、提醒频率等设置也会保留。
 4. 验证：托盘菜单底部应显示「便签 v1.1.0」；此时再点「检查更新…」会提示"已是最新版本"（因为已装 1.1.0 = GitHub 最新 1.*。*）。
 顺带一提：GitHub Release 的资产上传建议用英文文件名（如 bianqian-1.1.0-setup.exe）。GitHub 的资产名编辑框对中文支持不佳，中文名资产常被塌缩成同名，导致发布时报 release assets name has already been taken。便签识别安装版的规则是"文件名含 setup/安装版 且不含 portable/便携版"，英文命名同样能被正确识别。
